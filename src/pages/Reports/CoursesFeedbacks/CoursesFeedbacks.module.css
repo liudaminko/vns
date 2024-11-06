@@ -1,0 +1,47 @@
+.container {
+  margin: 20px;
+  position: relative;
+  height: 100%;
+}
+
+.filtersContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.filterSelect,
+.datePicker {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.feedbackTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.feedbackTable th,
+.feedbackTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.feedbackTable th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.feedbackTable tr:hover {
+  background-color: #f9f9f9;
+}
+.exportButtonContainer {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}

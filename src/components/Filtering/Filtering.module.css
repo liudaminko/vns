@@ -1,0 +1,80 @@
+.filterContainer {
+  position: relative;
+  display: inline-block;
+  min-width: 200px; /* Fixed width to prevent resizing */
+}
+
+.filterButton {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  width: 100%; /* Ensure the dropdown matches the button width */
+  z-index: 1000;
+}
+
+.filterCategory {
+  margin-bottom: 15px;
+}
+
+.filterCategory h4 {
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.optionsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.option {
+  padding: 5px 12px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.2s, border-color 0.2s;
+  text-align: center;
+}
+
+.option:hover {
+  background-color: #e0e0e0;
+}
+
+.selected {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+.sliderContainer {
+  margin-top: 15px;
+}
+
+.rangeValues {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  font-size: 0.9em;
+}

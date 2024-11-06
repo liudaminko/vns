@@ -1,0 +1,88 @@
+.container {
+  margin: 20px;
+  height: 100%;
+  position: relative;
+}
+
+.filtersContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.courseSelect,
+.groupSelect,
+.searchInput {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.searchInput {
+  width: 200px;
+}
+
+.completionTableContainer {
+  max-height: 500px;
+  overflow-y: auto;
+  margin-top: 20px;
+}
+
+.completionTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.completionTable th,
+.completionTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.completionTable th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.completionTable tr:hover {
+  background-color: #f1f1f1;
+}
+
+.exportButtonContainer {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+.expandButton {
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.taskDetailsContainer {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
+}
+
+.taskDetailsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 6px;
+  font-size: 12px;
+}
+
+.taskDetailsTable th,
+.taskDetailsTable td {
+  border: 1px solid #ddd;
+  padding: 4px;
+  text-align: left;
+}
+
+.taskDetailsTable th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}

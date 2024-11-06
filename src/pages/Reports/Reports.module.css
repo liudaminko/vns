@@ -1,0 +1,10 @@
+.reportsContainer {
+  display: flex;
+  padding: 0 32px 64px;
+  height: calc(100vh - 86px);
+}
+
+.contentArea {
+  flex: 1;
+  padding: 20px;
+}

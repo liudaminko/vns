@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Home from "./pages/Home/Home";
+import Auth from "./pages/Auth/Auth";
+import PersonalCabinet from "./pages/PersonalCabinet/PersonalCabinet";
+import Grades from "./pages/Grades/Grades";
+import Reports from "./pages/Reports/Reports";
+import { mockUsers } from "./mockUsers";
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(mockUsers[1]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Header user={currentUser} />
+        <div style={{ paddingTop: "86px" }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/profile" element={<PersonalCabinet />} />
+            <Route path="/grades" element={<Grades />} />
+            <Route path="/reports" element={<Reports />} />
+          </Routes>
+        </div>
+        <Footer />
+      </Router>
     </div>
   );
 }

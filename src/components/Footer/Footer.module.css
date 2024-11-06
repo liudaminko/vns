@@ -1,0 +1,35 @@
+.footer {
+  background-color: #f1f1f1;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #ccc;
+}
+
+.footerContent {
+  margin-bottom: 15px;
+}
+
+.studentList {
+  list-style: none;
+  padding: 0;
+  margin: 5px 0;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.footerNav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #007bff;
+  transition: color 0.3s;
+}
+
+.navLink:hover {
+  color: #0056b3;
+}

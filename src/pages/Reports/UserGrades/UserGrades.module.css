@@ -1,0 +1,64 @@
+.container {
+  margin: 20px;
+  height: 100%;
+  position: relative;
+}
+
+.controlsContainer {
+  display: flex;
+  justify-content: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.filterContainer,
+.sortContainer {
+  display: inline-block;
+  min-width: 150px;
+}
+
+.selectedFilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.filterTag {
+  background-color: #e0e0e0;
+  border-radius: 12px;
+  padding: 5px 8px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+.removeIcon {
+  margin-left: 5px;
+  cursor: pointer;
+  color: red;
+}
+
+.gradesTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.gradesTable th,
+.gradesTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.gradesTable th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+.exportButtonContainer {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}

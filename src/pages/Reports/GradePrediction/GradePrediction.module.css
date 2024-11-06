@@ -1,0 +1,33 @@
+.container {
+  margin: 20px;
+}
+
+.searchContainer {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px;
+}
+
+.searchButton {
+  padding: 5px 10px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.chartsContainer {
+  margin-top: 20px;
+}
+
+h4 {
+  margin-top: 20px;
+}
