@@ -17,6 +17,7 @@ const CoursesFeedbacks: React.FC = () => {
   const [selectedCourse, setSelectedCourse] = useState<string>("All");
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
+  const [expandedRow, setExpandedRow] = useState<number | null>(null); // Track expanded row
   const { t } = useTranslation();
 
   const feedbackData: Feedback[] = [
@@ -25,7 +26,9 @@ const CoursesFeedbacks: React.FC = () => {
       course: "Math",
       date: new Date("2023-03-15"),
       rating: 5,
-      comment: t("course_feedback.comment_great"),
+      comment: t(
+        "kgjhwrg gwreoighrg wrgowrgtuhwerotuihwernt wretgouwrthwrkjbg efb jronoreu nojfwoju oeuurroj3eoj"
+      ),
     },
     {
       studentName: "Student B",
@@ -52,7 +55,6 @@ const CoursesFeedbacks: React.FC = () => {
 
   const courses = ["All", "Math", "Science", "History"];
 
-  // Filter the data based on selected course and date range
   const filteredData = feedbackData.filter((feedback) => {
     const matchesCourse =
       selectedCourse === "All" || feedback.course === selectedCourse;
@@ -62,13 +64,9 @@ const CoursesFeedbacks: React.FC = () => {
     return matchesCourse && matchesDateRange;
   });
 
-  const reportColumns = [
-    t("student_name"),
-    t("course"),
-    t("date"),
-    t("rating"),
-    t("comment"),
-  ];
+  const handleRowClick = (index: number) => {
+    setExpandedRow(expandedRow === index ? null : index); // Toggle expanded state
+  };
 
   return (
     <div className={styles.container}>
@@ -107,32 +105,43 @@ const CoursesFeedbacks: React.FC = () => {
         />
       </div>
 
-      <table className={styles.feedbackTable}>
-        <thead>
-          <tr>
-            <th>{t("student_name")}</th>
-            <th>{t("course")}</th>
-            <th>{t("date")}</th>
-            <th>{t("rating")}</th>
-            <th>{t("comment")}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredData.map((feedback, index) => (
-            <tr key={index}>
-              <td>{feedback.studentName}</td>
-              <td>{feedback.course}</td>
-              <td>{feedback.date.toLocaleDateString()}</td>
-              <td>{feedback.rating} / 5</td>
-              <td>{feedback.comment}</td>
+      <div className={styles.tableContainer}>
+        <table className={styles.feedbackTable}>
+          <thead>
+            <tr>
+              <th>{t("student_name")}</th>
+              <th>{t("course")}</th>
+              <th>{t("date")}</th>
+              <th>{t("rating")}</th>
+              <th>{t("comment")}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredData.map((feedback, index) => (
+              <tr
+                key={index}
+                onClick={() => handleRowClick(index)}
+                className={expandedRow === index ? styles.expandedRow : ""}
+              >
+                <td>{feedback.studentName}</td>
+                <td>{feedback.course}</td>
+                <td>{feedback.date.toLocaleDateString()}</td>
+                <td>{feedback.rating} / 5</td>
+                <td className={styles.commentCell}>
+                  {expandedRow === index
+                    ? feedback.comment
+                    : feedback.comment.slice(0, 30) + "..."}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
       <div className={styles.exportButtonContainer}>
         <ExportButton
           data={filteredData}
-          columns={reportColumns}
+          columns={["student_name", "course", "date", "rating", "comment"]}
           fileName="Courses_Feedback_Report"
         />
       </div>

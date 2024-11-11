@@ -69,8 +69,7 @@ const Filtering: React.FC<{
         <div className={styles.dropdown}>
           {Object.keys(availableFilters).map((category, index) => (
             <div key={index} className={styles.filterCategory}>
-              <h4>{t(category.toLowerCase())}</h4>{" "}
-              {/* Translate category names */}
+              <h4>{t(category.toLowerCase())}</h4>
               <div className={styles.optionsContainer}>
                 {availableFilters[category].map((option, idx) => (
                   <div

@@ -41,7 +41,6 @@ const AttemptsCountSuccessRate: React.FC = () => {
     },
   ];
 
-  // Filter data based on selected test and search term
   const filteredData = attemptData.filter((data) => {
     const matchesTest =
       selectedTest === "All" || data.testName === selectedTest;
@@ -51,15 +50,14 @@ const AttemptsCountSuccessRate: React.FC = () => {
     return matchesTest && matchesSearch;
   });
 
-  // Prepare data for export
   const exportData = filteredData.map((data) => ({
     studentName: data.studentName,
     testName: data.testName,
     attempts: data.attempts,
-    grades: data.grades.join(", "), // Joining grades as a string
+    grades: data.grades.join(", "),
     averageGrade: (
       data.grades.reduce((a, b) => a + b, 0) / data.grades.length
-    ).toFixed(2), // Average grade
+    ).toFixed(2),
   }));
 
   const columns = [

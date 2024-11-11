@@ -1,38 +1,46 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 import { User } from "../../mockUsers";
 import { useTranslation } from "react-i18next";
+import { useSidebar } from "../../SidebarContext";
 
 interface HeaderProps {
-  user: User;
+  user: User | null;
+  onLogout?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ user }) => {
-  const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [languageDropdownVisible, setLanguageDropdownVisible] = useState(false); // New state for language dropdown
+const Header: React.FC<HeaderProps> = ({ user, onLogout }) => {
   const { t, i18n } = useTranslation();
+  const { toggleSidebar } = useSidebar();
+  const navigate = useNavigate();
+
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [languageDropdownVisible, setLanguageDropdownVisible] = useState(false);
 
   const toggleDropdown = () => {
-    setDropdownVisible(!dropdownVisible);
+    if (user) {
+      setDropdownVisible(!dropdownVisible);
+    } else {
+      navigate("/auth");
+    }
   };
 
-  const toggleLanguageDropdown = () => {
+  const toggleLanguageDropdown = () =>
     setLanguageDropdownVisible(!languageDropdownVisible);
-  };
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
-    setLanguageDropdownVisible(false); // Close language dropdown after selection
+    setLanguageDropdownVisible(false);
   };
 
   const dropdownItems: { label: string; path: string }[] = (() => {
-    switch (user.role) {
+    switch (user?.role) {
       case "student":
         return [
           { label: t("user_profile"), path: "/profile" },
-          { label: "Мої курси", path: "/courses" },
-          { label: "Оцінки", path: "/grades" },
+          { label: t("my_courses"), path: "/courses" },
+          { label: t("grades"), path: "/grades" },
           { label: t("logout"), path: "/logout" },
         ];
       case "editor":
@@ -45,8 +53,8 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
       case "admin":
         return [
           { label: t("user_profile"), path: "/profile" },
-          { label: "Управління користувачами", path: "/user-management" },
-          { label: "Налаштування", path: "/settings" },
+          { label: t("user_management"), path: "/user-management" },
+          { label: t("settings"), path: "/settings" },
           { label: t("logout"), path: "/logout" },
         ];
       default:
@@ -61,10 +69,16 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
 
   return (
     <div className={styles.container}>
-      <Link to="/">
-        <img src="/logo.png" style={{ height: "2rem" }} alt="logo" />
-      </Link>
-      <div className={styles.headerInfo}>
+      <div className={styles.headerLeft}>
+        <button className={styles.burgerButton} onClick={toggleSidebar}>
+          ☰
+        </button>
+        <Link to="/" className={styles.logoLink}>
+          <img src="/logo.png" className={styles.logo} alt="logo" />
+        </Link>
+      </div>
+
+      <div className={styles.headerRight}>
         <div className={styles.languageSwitcher}>
           <button
             onClick={toggleLanguageDropdown}
@@ -132,38 +146,45 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
             </div>
           )}
         </div>
-        <div className={styles.userCompound}>
-          <button className={styles.userButton} onClick={toggleDropdown}>
-            <span className={styles.userName}>{user.name}</span>
-            {user.profilePic ? (
+
+        <div
+          className={`${styles.userCompound} ${
+            !user ? styles.grayUserCompound : ""
+          }`}
+          onClick={toggleDropdown}
+        >
+          {user ? (
+            <>
+              <span className={styles.userName}>{user.name}</span>
+              {user.profilePic ? (
+                <img
+                  src={user.profilePic}
+                  alt="Profile"
+                  className={styles.profilePic}
+                />
+              ) : (
+                <div className={styles.initials}>{getInitials(user.name)}</div>
+              )}
               <img
-                src={user.profilePic}
-                alt="Profile"
-                className={styles.profilePic}
+                src={dropdownVisible ? "/up.png" : "/down.png"}
+                alt={dropdownVisible ? "Collapse" : "Expand"}
+                className={styles.arrowIcon}
               />
-            ) : (
-              <div className={styles.initials}>{getInitials(user.name)}</div>
-            )}
-            <img
-              src={dropdownVisible ? "/up.png" : "/down.png"}
-              alt={dropdownVisible ? "Collapse" : "Expand"}
-              className={styles.arrowIcon}
-            />
-          </button>
-          {dropdownVisible && (
-            <div className={styles.dropdownMenu} onClick={toggleDropdown}>
-              {dropdownItems.map((item, index) => (
-                <Link
-                  key={index}
-                  to={item.path}
-                  className={styles.dropdownItem}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
+            </>
+          ) : (
+            <span className={styles.userName}>{t("login")}</span>
           )}
         </div>
+
+        {user && dropdownVisible && (
+          <div className={styles.dropdownMenu} onClick={toggleDropdown}>
+            {dropdownItems.map((item, index) => (
+              <Link key={index} to={item.path} className={styles.dropdownItem}>
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

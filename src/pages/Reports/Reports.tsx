@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Reports.module.css";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import UserGrades from "./UserGrades/UserGrades";
@@ -7,9 +7,25 @@ import CoursesFeedbacks from "./CoursesFeedbacks/CoursesFeedbacks";
 import GradePrediction from "./GradePrediction/GradePrediction";
 import GradeTimeCorrelation from "./GradeTimeCorrelation/GradeTimeCorrelation";
 import AttemptsCountSuccessRate from "./AttemptsCountSuccessRate/AttemptsCountSuccessRate";
+import { useSidebar } from "../../SidebarContext";
 
 const Reports: React.FC = () => {
   const [selectedReport, setSelectedReport] = useState<string>("UserGrades");
+  const { isSidebarOpen, closeSidebar } = useSidebar();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const renderReportContent = () => {
     switch (selectedReport) {
@@ -32,7 +48,20 @@ const Reports: React.FC = () => {
 
   return (
     <div className={styles.reportsContainer}>
-      <Sidebar setSelectedReport={setSelectedReport} />
+      {isSidebarOpen && (
+        <div
+          className={`${styles.overlay} ${isSidebarOpen ? styles.active : ""}`}
+          onClick={closeSidebar}
+        ></div>
+      )}
+
+      {(!isMobile || isSidebarOpen) && (
+        <Sidebar
+          setSelectedReport={setSelectedReport}
+          isOpen={isMobile ? isSidebarOpen : true} // Always open on desktop
+          onClose={closeSidebar}
+        />
+      )}
       <div className={styles.contentArea}>{renderReportContent()}</div>
     </div>
   );

@@ -149,15 +149,15 @@ const UserGrades: React.FC = () => {
         {filters.map((filter, index) => (
           <div key={index} className={styles.filterTag}>
             {t(filter.type)}: {filter.value}
-            <span
+            <img
+              src="/close.png"
+              height={"8px"}
               className={styles.removeIcon}
               onClick={() => {
                 const updatedFilters = filters.filter((_, i) => i !== index);
                 setFilters(updatedFilters);
               }}
-            >
-              ✖
-            </span>
+            />
           </div>
         ))}
       </div>

@@ -1,7 +1,7 @@
 .filterContainer {
   position: relative;
   display: inline-block;
-  min-width: 200px; /* Fixed width to prevent resizing */
+  min-width: 200px;
 }
 
 .filterButton {
@@ -28,7 +28,7 @@
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 15px;
-  width: 100%; /* Ensure the dropdown matches the button width */
+  width: 100%;
   z-index: 1000;
 }
 

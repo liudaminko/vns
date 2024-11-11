@@ -26,8 +26,8 @@
 }
 
 .filterTag {
-  background-color: #e0e0e0;
   border-radius: 12px;
+  border: 1px solid #007bff;
   padding: 5px 8px;
   display: flex;
   align-items: center;
@@ -37,7 +37,6 @@
 .removeIcon {
   margin-left: 5px;
   cursor: pointer;
-  color: red;
 }
 
 .gradesTable {

@@ -1,9 +1,14 @@
 .sidebar {
   width: 250px;
-  height: 100%;
+  height: 100vh;
+  margin-top: 58px;
   background-color: #f0f0f0;
   padding: 10px;
   border-right: 1px solid #ddd;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
 }
 
 .sidebarButton {
@@ -18,4 +23,40 @@
 
 .sidebarButton:hover {
   background-color: #e0e0e0;
+}
+
+.closeButton {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100vw;
+    max-width: 100vw;
+    height: auto;
+    position: fixed;
+    top: 58px;
+    left: 0;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+    margin: 0;
+  }
+
+  .sidebar.open {
+    transform: translateY(0);
+  }
+
+  .closeButton {
+    display: block;
+  }
+  .sidebarButton {
+    width: 100%;
+  }
 }

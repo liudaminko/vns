@@ -19,8 +19,14 @@
   border: 1px solid #ccc;
 }
 
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+}
+
 .feedbackTable {
   width: 100%;
+  min-width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
@@ -30,6 +36,25 @@
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
+  vertical-align: top;
+  cursor: pointer;
+}
+
+.feedbackTable th:nth-child(-n + 4),
+.feedbackTable td:nth-child(-n + 4) {
+  width: 100px;
+}
+
+.feedbackTable td.commentCell {
+  max-height: 3em;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+}
+
+.feedbackTable tr.expandedRow .commentCell {
+  max-height: 10em;
+  overflow-y: auto;
 }
 
 .feedbackTable th {
@@ -40,8 +65,51 @@
 .feedbackTable tr:hover {
   background-color: #f9f9f9;
 }
+
 .exportButtonContainer {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 0;
+    position: relative;
+    height: 100%;
+  }
+  .filtersContainer {
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+  }
+
+  .feedbackTable td.commentCell {
+    max-height: 3em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+  }
+
+  .feedbackTable .expandedRow .commentCell {
+    max-height: 10em;
+    white-space: normal;
+    overflow-y: auto;
+    text-overflow: unset;
+  }
+
+  .feedbackTable td.commentCell {
+    transition: max-height 0.3s ease;
+  }
+
+  .tableContainer {
+    max-width: 100vw;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .feedbackTable {
+    font-size: 12px;
+    width: 100%;
+  }
 }
